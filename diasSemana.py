@@ -5,6 +5,7 @@ class Prioridade(Enum):
     BAIXA = "Baixa"
     MEDIA = "Média"
     ALTA = "Alta"
+    INDEFINIDA = "Indefinida"
 
 class DiaStrategy(ABC):
     """Abstração para cada dia da semana"""
@@ -95,3 +96,12 @@ class DomingoStrategy(DiaStrategy):
     @abstractmethod
     def get_priority(self) -> Prioridade:
         return Prioridade.BAIXA
+
+class InvalidoStrategy(DiaStrategy):
+    """Dia inválido ou sem estratégia"""
+
+    def execute(self, user: str, info: str) -> str:
+        return f"Dia inválido ou sem estratégia. Nenhuma ação executada, {user}."
+
+    def get_priority(self) -> Prioridade:
+        return Prioridade.INDEFINIDA
