@@ -16,3 +16,5 @@ O projeto utiliza o padrão de projeto **Strategy Pattern**:
 - Cada dia da semana possui uma estratégia própria (`SegundaStrategy`, `TercaStrategy` etc.) que implementa esse comportamento com sua mensagem e prioridade.
 
 ## Questões de reflexão
+
+1. Em vez de o StrategySelector retornar None quando o dia não existe (forçando o main a fazer if estrategia is not None antes de cada chamada), ele sempre retorna um objeto de strategy válido. Quando não tem dia correspondente, retorna uma strategy InvalidoStrategy que implementa a mesma interface. Assim o main chama estrategia.execute(...) e estrategia.get_priority() direto, sem checar nulo.
