@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from datetime import datetime
 from enum import Enum
 
 class Prioridade(Enum):
@@ -106,3 +107,16 @@ class StrategySelector:
 
     def get_strategy(self, dia: str) -> DiaStrategy:
         return self.strategies.get(dia.lower(), InvalidoStrategy())
+
+DIAS_SEMANA = {
+    0: "segunda-feira",
+    1: "terca-feira",
+    2: "quarta-feira",
+    3: "quinta-feira",
+    4: "sexta-feira",
+    5: "sabado",
+    6: "domingo",
+}
+
+def get_dia_atual() -> str:
+    return DIAS_SEMANA[datetime.now().weekday()]
