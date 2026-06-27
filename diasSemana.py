@@ -105,3 +105,18 @@ class InvalidoStrategy(DiaStrategy):
 
     def get_priority(self) -> Prioridade:
         return Prioridade.INDEFINIDA
+
+class StrategySelector:
+    def __init__(self):
+        self.strategies = {
+            "segunda-feira": SegundaStrategy(),
+            "terça-feira": TercaStrategy(),
+            "quarta-feira": QuartaStrategy(),
+            "quinta-feira": QuintaStrategy(),
+            "sexta-feira": SextaStrategy(),
+            "sabado": SabadoStrategy(),
+            "domingo": DomingoStrategy()
+        }
+
+    def get_strategy(self, dia: str) -> DiaStrategy:
+        return self.strategies.get(dia.lower(), InvalidoStrategy())
