@@ -120,3 +120,23 @@ DIAS_SEMANA = {
 
 def get_dia_atual() -> str:
     return DIAS_SEMANA[datetime.now().weekday()]
+
+def ler_entrada() -> tuple[str, str, str]:
+    nome = input("Nome do usuário: ").strip()
+    info = input("Informação adicional (tarefa, meta, etc.): ").strip()
+    dia_manual = input("Dia da semana (opcional, Enter para usar o dia atual): ").strip()
+    dia = dia_manual if dia_manual else get_dia_atual()
+    return nome, info, dia
+
+def main() -> None:
+    nome, info, dia = ler_entrada()
+    estrategia = StrategySelector().get_strategy(dia)
+
+    print()
+    print(f"Usuário: {nome}")
+    print(f"Dia consultado: {dia}")
+    print(f"Prioridade: {estrategia.get_priority().value.upper()}")
+    print(f"Mensagem: {estrategia.execute(nome, info)}")
+
+if __name__ == "__main__":
+    main()
